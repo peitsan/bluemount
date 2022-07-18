@@ -1,0 +1,52 @@
+.trigger {
+    padding: 0 24px;
+    font-size: 18px;
+    line-height: 64px;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.logo-wrapper {
+    display: flex;
+    justify-content: center;
+    height: 64px;
+    background-color: var(--first-background-color);
+}
+
+#components-layout-demo-custom-trigger .trigger:hover {
+    color: #1890ff;
+}
+
+#components-layout-demo-custom-trigger .logo {
+    height: 32px;
+    margin: 16px;
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.site-layout {
+    min-width: var(--min-width);
+    min-height: var(--min-height);
+}
+
+.site-layout-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--first-background-color) !important;
+    box-shadow: var(--stereoscopic-box-shadow) !important;
+}
+.frame-img-wrapper {
+    display: flex;
+}
+.frame-img {
+    margin: 0 10px 0 0;
+}
+.site-layout-content {
+    padding: 0 16px;
+    max-height: 657px;
+    overflow: auto !important;
+    position: relative;
+}
+.ant-layout-sider-children {
+    background: var(--second-background-color) !important;
+}

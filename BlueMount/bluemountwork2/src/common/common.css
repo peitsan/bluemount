@@ -1,0 +1,137 @@
+:root {
+  /* 页面最小宽度 */
+  --min-width: 100%;
+  /* 页面最小高度 */
+  --min-height: 100%;
+
+  /* 一级主题颜色 深绿 */
+  --first-theme-color: rgb(0, 83, 7);
+  /* 二级主题颜色 浅绿 */
+  --second-theme-color: rgb(153, 190, 173);
+  /* 一级背景颜色 白色 */
+  --first-background-color: rgb(255, 255, 255);
+  /* 二级背景颜色 灰色 */
+  --second-background-color: rgb(240, 242, 245);
+  /* 颜色box-shadow */
+  --color-box-shadow: 0 0 0 2px rgb(0 83 7 / 20%) !important;
+
+  /* 立体悬浮效果 */
+  --stereoscopic-box-shadow: 0 8px 12px rgb(0 33 79 / 11%) !important;
+  --stereoscopic-border-radius: 10px !important;
+
+  /* success warning error */
+  --success-color: rgb(82, 196, 26);
+  --warning-color: rgb(222, 151, 9);
+  --error-color: rgb(255, 77, 79);
+
+  /* 强调型字体 */
+  --emphasize-font-size: 20px;
+}
+
+/* antd组件样式全局修改 */
+.ant-table {
+  box-shadow: var(--stereoscopic-box-shadow);
+}
+/* 搜索 */
+.ant-input-search {
+  width: 200px !important;
+  position: relative;
+  box-shadow: 0 8px 12px rgb(0 33 79 / 11%) !important;
+  border-radius: 10px !important;
+}
+.ant-input-search input {
+  border-radius: 10px !important;
+  border: none;
+}
+.ant-input-search .ant-input-group-addon {
+  position: absolute;
+}
+.ant-input-search .ant-input-group-addon > button {
+  position: absolute;
+  height: 30px;
+  left: 220px;
+  border-radius: 10px !important;
+  box-shadow: 0 8px 12px rgb(0 33 79 / 11%) !important;
+  border: none;
+}
+/* 气泡确认框 确认按钮 */
+
+/* tabs */
+.ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
+  color: var(--first-theme-color) !important;
+}
+.ant-tabs-tab:hover {
+  color: var(--first-theme-color) !important;
+}
+.ant-tabs-tab-btn:active {
+  color: var(--first-theme-color) !important;
+}
+/* loading */
+.ant-spin-dot-item {
+  background-color: var(--first-theme-color) !important;
+}
+/* 增加原因 */
+.ant-btn-dashed:hover,
+.ant-btn-dashed:focus {
+  color: var(--first-theme-color) !important;
+  border-color: var(--first-theme-color) !important;
+}
+/* 输入框 */
+.ant-input:hover {
+  border-color: var(--first-theme-color) !important;
+}
+.ant-input:focus,
+.ant-input-focused {
+  border-color: var(--first-theme-color) !important;
+  box-shadow: var(--color-box-shadow);
+}
+.ant-input-number .ant-input-number-in-form-item,
+.ant-input-number-focused,
+.ant-input-number:hover,
+.ant-input-number:focus {
+  border-color: var(--first-theme-color) !important;
+  box-shadow: var(--color-box-shadow) !important;
+}
+/* 点击上传附件 */
+.ant-btn-default:hover,
+.ant-btn-default:focus {
+  color: var(--first-theme-color) !important;
+}
+/* 登陆密码框 */
+.ant-input-affix-wrapper:focus {
+  border-color: var(--first-theme-color) !important;
+  box-shadow: var(--color-box-shadow);
+}
+/* 时间选择框 */
+.ant-picker-focused,
+.ant-picker:focus {
+  border-color: var(--first-theme-color) !important;
+  box-shadow: var(--color-box-shadow) !important;
+}
+.ant-picker:hover {
+  border-color: var(--first-theme-color) !important;
+}
+/* 下拉框 */
+.ant-select-focused:not(.ant-select-disabled).ant-select:not(.ant-select-customize-input)
+  .ant-select-selector {
+  border-color: var(--first-theme-color) !important;
+  box-shadow: var(--color-box-shadow) !important;
+}
+.ant-select-selector:hover {
+  border-color: var(--first-theme-color) !important;
+}
+/* 徽标颜色 */
+
+.ant-badge-status-processing {
+  background-color: var(--warning-color) !important;
+}
+.ant-badge-status-processing::after {
+  border: 1px solid var(--warning-color) !important;
+}
+
+.ant-btn:hover {
+  border-color: var(--first-theme-color) !important;
+}
+.ant-btn:focus {
+  border-color: var(--first-theme-color) !important;
+}
