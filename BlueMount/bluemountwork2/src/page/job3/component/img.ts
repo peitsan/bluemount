@@ -6,56 +6,106 @@ export const MainContain =styled.div`
     border: 1px solid #c1e5e4;
     border-radius :12px ;
     width:1440px;
-    height:1920px;
+    height:1600px;
     .Margin{
-         margin:24px;
+         margin:56px;
          background:#ffffff;
-         border: 1px solid #c1e5e4;
-        .tarbar{
-        margin:2% 0 0 0;
+         border: 1p x solid #c1e5e4;
+        .Tarbar{
+        background:#efefef;
         width:100%;
-        height:80px;
+        height:128px;
+        display:flex;   
+        float：left;
         }
         .Banner{
             margin: 0 0 2% 0;
             width:100%;
             height:49%;
             .imgBan{
-               height:200px;
+               height:100px;
             }
         }
-        .SubContentA{
-             margin:0 1% 1% 1%;
-             float:left;
-             width:23%;
-             height:46%;
+        .Content{
+            height:50%;
+            width:100%;
+            display:flex;
+             .ContentA{
+                 margin:0 1% 1% 1%;
+                 float:left;
+                 width:33%;
+                 height:92%;
+            }
+            .ContentB{
+                 margin:0 1% 1% 1%;
+                 float:left;
+                 width:33%;
+                 height:92%;
+            }
+            .ContentC{
+                 margin:0 1% 1% 1%;
+                 float:left;
+                 width:33%;
+                 height:92%;
+            }   
         }
-        .SubContentB{
-             margin:0 1% 1% 1%;
-             float:left;
-             width:23%;
-             height:46%;
-        }
-        .SubContentA{
-             margin:0 1% 1% 1%;
-             float:left;
-             width:46%;
-             height:94%;
-        }   
+       
     }
 `
 export const Tarbar = styled.div`
-    width:100%;
-    height:20px;
-     .logo{
-                    height:50px;
-                    width:50px;
+    background:#efedef;
+     .logoContainer{
+              margin:0;   
+              display:flex; 
+              padding:4% 0 0 12%;  
+              height:100%;
+              width:25%;
+              .logo{
+                 width:120%;
+             }
+          }
+      .search{  
+              display:flex; 
+              float:left;
+              width:5%;
+              height：100%;
+              padding:5% 0 0 0%;  
+               .search-icon{
+                font-size:32px;
+               }
                 }
-     .search{
-                     width:16px;
-                }。
-    
+     .Navigate{
+              display:flex; 
+              float:right;
+              width:66%;
+              height：100%;
+              padding:5% 0 0 12%;  
+        .Navi{
+             display:inline;
+             width:24%;
+             text-align:"center";
+             font-size:22px;
+             font-weight:624;
+            
+        }
+    }
 `
 export const Container = styled.div`
-
+   .ContentIcon{
+      margin:20% 33% 5% 33%;
+      height:20%;
+   }
+   .ContentTitle{
+      margin:8% 15% 10% 15%;
+      height:10%;
+      text-align:center;
+      font-size:18px; 
+      font-weight:624;    
+   }
+    .ContentMain{
+         margin:8% 15% 10% 15%;
+          height:10%;
+          font-size:14px; 
+          font-weight:524;   
+    }
 `

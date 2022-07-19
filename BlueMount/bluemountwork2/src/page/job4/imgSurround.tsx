@@ -1,3 +1,5 @@
+//问就是手动化战士
+//Authorized by iiru
 import React from "react";
 import  "./imgSurround.css";
 
@@ -51,22 +53,22 @@ export const ImgSurround = () => {
             return (
                 <div className={"perspective"}>
                     <div className={"wrap"} id="imgMatrix" onMouseOver={surround}>
-                        <img src={require("../../assets/img/1.jpg")} alt={""}  />
-                        <img src={require("../../assets/img/2.jpg")} alt={""} />
-                        <img src={require("../../assets/img/3.jpg")} alt={""} />
-                        <img src={require("../../assets/img/4.jpg")} alt={""} />
-                        <img src={require("../../assets/img/5.jpg")} alt={""} />
-                        <img src={require("../../assets/img/6.jpg")} alt={""}/>
-                        <img src={require("../../assets/img/7.jpg")} alt={""} />
-                        <img src={require("../../assets/img/8.jpg")} alt={""} />
-                        <img src={require("../../assets/img/9.jpg")} alt={""} />
-                        <img src={require("../../assets/img/10.jpg")} alt={""} />
-                        <img src={require("../../assets/img/11.jpg")} alt={""} />
-                        <img src={require("../../assets/img/12.jpg")} alt={""} />
-                        <img src={require("../../assets/img/13.jpg")} alt={""} />
-                        <img src={require("../../assets/img/14.jpg")} alt={""} />
-                        <img src={require("../../assets/img/15.jpg")} alt={""} />
-                        <p></p>
+                        <img className={"wrapimg"} src={require("../../assets/img/1.jpg")} alt={""}  />
+                        <img className={"wrapimg"} src={require("../../assets/img/2.jpg")} alt={""} />
+                        <img className={"wrapimg"} src={require("../../assets/img/3.jpg")} alt={""} />
+                        <img className={"wrapimg"} src={require("../../assets/img/4.jpg")} alt={""} />
+                        <img className={"wrapimg"} src={require("../../assets/img/5.jpg")} alt={""} />
+                        <img className={"wrapimg"} src={require("../../assets/img/6.jpg")} alt={""}/>
+                        <img className={"wrapimg"} src={require("../../assets/img/7.jpg")} alt={""} />
+                        <img className={"wrapimg"} src={require("../../assets/img/8.jpg")} alt={""} />
+                        <img className={"wrapimg"} src={require("../../assets/img/9.jpg")} alt={""} />
+                        <img className={"wrapimg"} src={require("../../assets/img/10.jpg")} alt={""} />
+                        <img className={"wrapimg"} src={require("../../assets/img/11.jpg")} alt={""} />
+                        <img className={"wrapimg"} src={require("../../assets/img/12.jpg")} alt={""} />
+                        <img className={"wrapimg"} src={require("../../assets/img/13.jpg")} alt={""} />
+                        <img className={"wrapimg"} src={require("../../assets/img/14.jpg")} alt={""} />
+                        <img className={"wrapimg"} src={require("../../assets/img/15.jpg")} alt={""} />
+                        <p className={"wrapp"}></p>
                     </div>
                 </div>
             );
