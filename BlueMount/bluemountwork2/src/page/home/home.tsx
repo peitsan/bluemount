@@ -39,6 +39,14 @@ export function MenuComponents() {
                     getItem("图片布局", "sub_1_3"),
                     getItem("3D环绕照片墙", "sub_1_4"),
                 ]),
+             getItem("第三次作业",
+                "2",
+                <PieChartOutlined/>,
+                [
+                    getItem("少女粉记事本", "sub_2_1"),
+                    getItem("可爱の计算器", "sub_2_2"),
+                    getItem("开学倒计时", "sub_2_3"),
+                ]),
         ];
         return map;
     };
@@ -47,10 +55,15 @@ export function MenuComponents() {
 
     // 菜单标签的key值映射到路由
     const menuToRoute: MenuToRoute = {
+        //第二周作业
         sub_1_1: "/home/infoCard",
         sub_1_2: "/home/gridLayout",
         sub_1_3: "/home/imgLayout",
         sub_1_4: "/home/imgSurround",
+        //第三周作业
+        sub_2_1: "/home/notebook",
+        sub_2_2: "/home/caculator",
+        sub_2_3: "/home/counter",
     };
 
     // 菜单标签点击事件

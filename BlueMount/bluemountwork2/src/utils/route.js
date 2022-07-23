@@ -1,13 +1,19 @@
 import {
     //主页
-        Home,
+    Home,
 //三加一项任务
-        InfoCard,
-        GridLayout,
-        ImgLayout,
-        ImgSurround,
+//第二次作业
+    InfoCard,
+    GridLayout,
+    ImgLayout,
+    ImgSurround,
+//第三次作业
+    Notebook,
+    Caculator,
+    Counter,
 } from "../page/index";
 import { Navigate } from "react-router-dom"
+
 const route = [
     //重定向到首页
     {
@@ -34,7 +40,19 @@ const route = [
             {
                 path:"imgSurround",
                 element:<ImgSurround />
-            }
+            },
+            {
+                path:"notebook",
+                element:<Notebook />
+            },
+            {
+                path:"caculator",
+                element:<Caculator />
+            },
+            {
+                path:"counter",
+                element:<Counter />
+            },
         ]
     }
 ]
