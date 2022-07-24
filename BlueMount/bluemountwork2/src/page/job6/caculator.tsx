@@ -98,7 +98,8 @@ export function Caculator() {
             this.setState({})
         };
         handleEqual(){
-            this.ans.equation= 0+eval(this.ans.formula)
+            this.ans.equation= eval((this.ans.equation?String(this.ans.equation):"0+")+this.ans.formula)
+            this.ans.formula= " "
             this.setState({})
         };
         handle(e:any){

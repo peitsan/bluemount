@@ -51,7 +51,6 @@ export function Counter(){
             this.setState({dataValue:[moment(startTime), moment(endTime)]})
         }
         getTime(val?:any){
-            console.log("!")
             var now:any =  new Date();
             var endTime = val[1]._d
             var delta = (endTime - now)/1000;
