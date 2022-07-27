@@ -60,8 +60,9 @@ export function Notebook(){
                         <div className={"noteover"}>
                             <CheckOutlined className={"check"} >
                             </CheckOutlined>
-                            <span className={"notice"}>
-                               {props.notice}
+                            {/*<span className={"notice"} onClick={props.onOver(props.sort)}>*/}
+                            <span className={"notice"} >
+                                {props.notice}
                              </span>
                             <CloseOutlined className={"delete"} onClick={props.onDel(props.sort)}>
                             </CloseOutlined>
@@ -86,9 +87,7 @@ export function Notebook(){
             }
         }
         handlerDel=(sort:any)=>{
-
             return ()=>{
-
                 let tempList =  this.state.dataList.slice(0, parseInt(sort)).concat(this.state.dataList.slice(parseInt(sort) + 1, this.state.dataList.length))
                 this.setState({dataList:tempList})
             }
@@ -96,20 +95,21 @@ export function Notebook(){
 
         handleOver=(sort:any)=>{
             let tempL = this.state.dataList;
+
             if(this.state.dataList[sort].status === 0){
                 tempL[sort].status = 1;
+                console.log(tempL)
                 return ()=>{
-                    console.log(sort)
                     this.setState({dataList:tempL})
                 }
             }
-            if(this.state.dataList[sort].status === 1){
+            else if(this.state.dataList[sort].status === 1){
                 tempL[sort].status = 2;
                 return ()=>{
                     this.setState({dataList:tempL})
                 }
             }
-            if(this.state.dataList[sort].status === 2){
+            else if(this.state.dataList[sort].status === 2){
                 tempL[sort].status = 0;
                 return ()=>{
                     this.setState({dataList:tempL})

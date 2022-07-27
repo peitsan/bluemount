@@ -11,6 +11,10 @@ import {
     Notebook,
     Caculator,
     Counter,
+ //第四次作业
+    PromiseAll,
+    Async,
+    Debounce
 } from "../page/index";
 import { Navigate } from "react-router-dom"
 
@@ -52,6 +56,30 @@ const route = [
             {
                 path:"counter",
                 element:<Counter />
+            },
+            {
+                path:"notebook",
+                element:<Notebook />
+            },
+            {
+                path:"caculator",
+                element:<Caculator />
+            },
+            {
+                path:"counter",
+                element:<Counter />
+            },
+            {
+                path:"promiseAll",
+                element:<PromiseAll />
+            },
+            {
+                path:"async",
+                element:<Async />
+            },
+            {
+                path:"debounce",
+                element:<Debounce />
             },
         ]
     }

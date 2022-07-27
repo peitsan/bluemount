@@ -13,3 +13,7 @@ export * from "./job5/notebook"
 export * from "./job6/caculator"
 export * from "./job7/counter"
 
+//第四次考核作业
+export * from "./job8/promiseAll"
+export * from "./job9/async"
+export * from "./job10/debounce"

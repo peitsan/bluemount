@@ -138,7 +138,7 @@ export function Caculator() {
                         <Numb numb={"7"} onClick={() => this.handle("7")}></Numb>
                         <Numb numb={"8"} onClick={() => this.handle("8")}></Numb>
                         <Numb numb={"9"} onClick={() => this.handle("9")}></Numb>
-                        <Sub onClick={() => this.handle("+")}></Sub>
+                        <Sub onClick={() => this.handle("-")}></Sub>
 
                         <Numb numb={"."} onClick={() => this.handle(".")}></Numb>
                         <Numb numb={"0"} onClick={() => this.handle("0")}></Numb>

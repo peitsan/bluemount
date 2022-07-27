@@ -47,6 +47,14 @@ export function MenuComponents() {
                     getItem("可爱の计算器", "sub_2_2"),
                     getItem("开学倒计时", "sub_2_3"),
                 ]),
+            getItem("第四次作业",
+                "3",
+                <PieChartOutlined/>,
+                [
+                    getItem("promise.all方法", "sub_3_1"),
+                    getItem("promise异步封装", "sub_3_2"),
+                    getItem("输入框防抖高阶函数", "sub_3_3"),
+                ]),
         ];
         return map;
     };
@@ -64,6 +72,10 @@ export function MenuComponents() {
         sub_2_1: "/home/notebook",
         sub_2_2: "/home/caculator",
         sub_2_3: "/home/counter",
+        //第四周作业
+        sub_3_1: "/home/promiseAll",
+        sub_3_2: "/home/async",
+        sub_3_3: "/home/debounce",
     };
 
     // 菜单标签点击事件
