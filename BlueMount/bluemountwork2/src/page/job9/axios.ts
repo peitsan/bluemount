@@ -36,24 +36,27 @@ interface XHR {
 }
 //请求api域名Url
 const baseConfig:any = {
-    baseUrl:"http://cqupt.sunshin.club",
-    contentType: 'application/json;charset=utf-8'
+    baseUrl:"http://cqupt.sunshin.club/api",
+    // contentType: 'application/json;charset=utf-8'
+    contentType: 'application/json'
 }
 //Ajax Post封装
 export const Post=(props:normalPost)=>{
+        // console.log(this)  //window
      const  post = async (params:any)=>{
             try{
                 let res = await httpReq({
                     method:"post",
                     url:params.url,
                     data:params.data,
-                    resMethod: "json" })
+                    resMethod:''})
+                console.log(res);
                 return res;
             }catch{
                 console.log("请求返回出错!")
             }
         }
-    return post(props)
+     post(props)
 }
 //Ajax Get异步封装
 export const Get=({url,data}:normalPost)=>{
@@ -63,7 +66,7 @@ export const Get=({url,data}:normalPost)=>{
                 method:"get",
                 url:url,
                 data:data,
-                resMethod: "json" })
+                resMethod:'' })
             return res;
         }catch{
             console.log("请求返回出错!")
@@ -72,13 +75,14 @@ export const Get=({url,data}:normalPost)=>{
 }
 //Ajax Put异步封装
 export const Put=({url,data}:normalPost)=>{
+
     return  async ()=>{
         try{
-            let res = await httpReq({
+            let res = await httpReq( {
                 method:"put",
                 url:url,
                 data:data,
-                resMethod: "json" })
+                resMethod: '' })
             return res;
         }catch{
             console.log("请求返回出错!")
@@ -93,44 +97,47 @@ export const Delete=({url,data}:normalPost)=>{
                 method:"delete",
                 url:url,
                 data:data,
-                resMethod: "json" })
+                resMethod:''})
             return res;
         }catch{
             console.log("请求返回出错!")
         }
     }
 }
-export const httpReq = ({method, url, data, resMethod}:XHR) =>{
-    let that:any = this;
-    //请求函数封装
-    const req =({method, url, data, resMethod}:XHR)=>{
-        //实例化XMLHttpRequest对象
-        const request = new XMLHttpRequest();
-        request.open(method,
-            baseConfig.baseUrl+url)
-        request.responseType = resMethod;
-        if (method === 'get') {
-            request.send(data);
-        } else {
-            request.setRequestHeader("Content-Type", baseConfig.contentType);
-            request.send(JSON.stringify(data));
-        }
-        console.log(request.responseXML)
-        return  request.responseXML;
-    }
-    return new Promise((resolve, reject)=> {
-      //拦截器
-            const res=()=>{
-                console.log(that)
-                if (that.readyState !== 4 ) return;
-                if (that.status === 200) resolve(that.response)
-                else reject(new Error(that.statusCode))
-            }
+export const httpReq = function (props:XHR){
 
-            res()
+    const promise=(e:any)=>new Promise((resolve, reject)=> {
+
+      const callBack=(request:any)=>{
+          let  e = request.responseXML
+          if (e.readyState !== 4 ) return;
+          if (e.status === 200) resolve(e.response)
+          else reject(new Error(e.statusCode))
+      }
+        //请求函数封装
+        const req =(props:XHR)=>{
+            //实例化XMLHttpRequest对象
+            //@ts-ignore
+            const request = new XMLHttpRequest();
+            request.withCredentials = true;
+            request.open(props.method,
+                baseConfig.baseUrl+props.url,
+                true)
+            request.responseType = props.resMethod;
+            console.log(request)
+            if (props.method === 'get') {
+                request.send(props.data);
+            } else {
+
+                request.setRequestHeader("Content-Type", baseConfig.contentType);
+                console.log(props.data)
+                request.send(props.data)
+            }
+            let res = request.responseXML
+            request.onreadystatechange =()=> callBack(res);
         }
-    ).then(
-        //确保异步请求
-        ()=>req({method, url, data, resMethod})
-    )
+        req(e);
+    })
+
+    return promise(props)
 }

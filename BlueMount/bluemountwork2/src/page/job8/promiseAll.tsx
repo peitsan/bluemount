@@ -1,40 +1,83 @@
 //Authored by iiru
 //powerby styled.js
+//Cite with https://juejin.cn/post/7069805387490263047
 import React from "react";
+import {MainContain} from "./promise";
+import { Button, Modal } from 'antd';
 
-import { message } from 'antd';
 
-const promiseall = () =>{
-    let p1 = new Promise((resolve, reject) => {
-        setTimeout(() => {
-            resolve('OK');
-        }, 1000);
-    })
-    let p2 = Promise.resolve('Success');
-    let p3 = Promise.resolve('Oh Yeah');
-//调用
-    const result = Promise.race([p1, p2, p3]);
+//重新封装自制的 Promise.All方法
+class myPromise{
+    static MyAll(method:any){
+        return new Promise((resolve, reject)=>{
+            let arr:any = [];
+            console.log(method);
+            method.forEach((item:any, id:any)=>{
+                Promise.resolve(item).then(res=>{
+                        arr[id] = res;
+                        if (arr.length === method.length)
+                        {
+                            resolve(arr)
+                            console.log(arr);
+                        }
+                    }
+                ).catch(reject)
+            })
 
-    setTimeout(function(){
-        console.log(result)
-            /*
-            Promise {<fulfilled>: Array(3)}
-            [[Prototype]]: Promise
-            [[PromiseState]]: "fulfilled"
-            [[PromiseResult]]: Array(3)
-            0: "OK"
-            1: "Success"
-            2: "Oh Yeah"
-            length: 3
-            [[Prototype]]: Array(0)
-            */
-    },2000)
+        })
+    }
 }
 
 export function PromiseAll(){
+    //定义三个Promise方法
+    const mise1 =  Promise.resolve("test resolve").then(()=>console.log("mise1"))
+    const mise2 = new Promise((resolve,reject)=> {
+        setTimeout(() => {
+            resolve('test resolve,reject');
+            console.log("mise2")
+        }, 2000)
 
+    })
+    const mise3 = new Promise((resolve,reject)=>{
+        setTimeout(()=>{
+            resolve('test reject,resolve')
+            console.log("mise3")
+        },3000)
+     }
+    )
+
+    //对三个Promise函数用封装好的MyAll调用  MyAll方法封装在myPromise类里面
+    const MyPromise =()=> myPromise.MyAll([mise1,mise2,mise3])
+    const [isModalVisible, setIsModalVisible] = React.useState(false);
+    const [response,setResponse] = React.useState("");
+
+    const showModal = (e:any) => {
+        setResponse(e);
+        setIsModalVisible(true);
+    };
+    const handleOk = () => {
+        setIsModalVisible(false);
+    };
+
+    const handleCancel = () => {
+        setIsModalVisible(false);
+    };
     return (
             <>
+                <MainContain>
+                    {/*异步调取弹窗*/}
+                    <Button onClick={()=> {
+                        MyPromise().then(
+                            r=>showModal(r))
+                    }} >点击触发MyPromiseAll
+                    </Button>
+                    <Modal title="PromiseALL Methods Return"
+                           visible={isModalVisible}
+                           onOk={handleOk}
+                           onCancel={handleCancel}>
+                        {response}
+                    </Modal>
+                  </MainContain>
             </>
     );
 };
