@@ -15,10 +15,10 @@ export function Async(){
     //封装请求参数:
     const loginData:Login = {
         mail:"reality3iiru@163.com",
-        password:""
+        password:"BLmfDJ8w5X"
     }
         //  mail:"reality3iiru@163.com",
-        // password:"123455"
+        // password:"BLmfDJ8w5X"
     //请求二次封装
     const loginPost= (e:any) => Post({url:"/login",data:e})
     //登录按钮函数
@@ -28,14 +28,21 @@ export function Async(){
             mail:e.mail.input.value,
             password:e.password.input.value}
         const tips=(data:any,e:any)=>{
-            if(e.status === 200){
-                message.success("Hello！"+data.mail.input.value)
-            }
-            else message.error("Sorry,Login Failed!")
+                if(e.code === 200)  message.success("Hello！"+data.mail.input.value)
+            else if(e.Code === 400) message.error("Sorry,Please Input Create Mail Account!")
+                else message.error("Sorry,Login Failed!")
         }
-        let res = loginPost(loginParmas)
-        console.log(res) //调试;
-        tips(e,res)
+        Promise.resolve(
+            //异步执行请求并取得返回体
+            loginPost(loginParmas))
+            .then(
+                (res)=>{
+                    tips(e,res)
+                }
+            )
+
+
+
     }
     return (
             <>

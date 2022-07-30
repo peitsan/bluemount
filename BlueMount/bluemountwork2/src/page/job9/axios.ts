@@ -37,104 +37,98 @@ interface XHR {
 //请求api域名Url
 const baseConfig:any = {
     baseUrl:"http://cqupt.sunshin.club/api",
-    // contentType: 'application/json;charset=utf-8'
-    contentType: 'application/json'
+    contentType: 'application/json;charset=utf-8'
 }
 //Ajax Post封装
 export const Post=(props:normalPost)=>{
-        // console.log(this)  //window
      const  post = async (params:any)=>{
             try{
-                let res = await httpReq({
+                let res:any = await httpReq({
                     method:"post",
                     url:params.url,
-                    data:params.data,
+                    data:(typeof params.data === "string")?params.data:JSON.stringify(params.data),
                     resMethod:''})
-                console.log(res);
-                return res;
+                return (typeof res === "object")?res:JSON.parse(res);
             }catch{
                 console.log("请求返回出错!")
             }
         }
-     post(props)
+    return post(props)
 }
 //Ajax Get异步封装
-export const Get=({url,data}:normalPost)=>{
-    return  async ()=>{
+export const Get=(props:normalPost)=>{
+    const  get = async (params:any)=>{
         try{
-            let res = await httpReq({
+            let res:any = await httpReq({
                 method:"get",
-                url:url,
-                data:data,
-                resMethod:'' })
-            return res;
+                url:params.url,
+                data:params.data,
+                resMethod:''})
+            return (typeof res === "object")?res:JSON.parse(res);
         }catch{
             console.log("请求返回出错!")
         }
     }
+    return get(props)
 }
 //Ajax Put异步封装
-export const Put=({url,data}:normalPost)=>{
-
-    return  async ()=>{
+export const Put=(props:normalPost)=>{
+    const  put = async (params:any)=>{
         try{
-            let res = await httpReq( {
+            let res:any = await httpReq({
                 method:"put",
-                url:url,
-                data:data,
-                resMethod: '' })
-            return res;
+                url:params.url,
+                data:params.data,
+                resMethod:''})
+            return (typeof res === "object")?res:JSON.parse(res);
         }catch{
             console.log("请求返回出错!")
         }
     }
+    return put(props)
 }
 //Ajax Delete异步封装
-export const Delete=({url,data}:normalPost)=>{
-    return  async ()=>{
+export const Delete=(props:normalPost)=>{
+    const  del = async (params:any)=>{
         try{
-            let res = await httpReq({
+            let res:any = await httpReq({
                 method:"delete",
-                url:url,
-                data:data,
+                url:params.url,
+                data:params.data,
                 resMethod:''})
-            return res;
+            return (typeof res === "object")?res:JSON.parse(res);
         }catch{
             console.log("请求返回出错!")
         }
     }
+    return del(props)
 }
 export const httpReq = function (props:XHR){
-
     const promise=(e:any)=>new Promise((resolve, reject)=> {
-
-      const callBack=(request:any)=>{
-          let  e = request.responseXML
+      const callBack=(e:any)=>{
           if (e.readyState !== 4 ) return;
           if (e.status === 200) resolve(e.response)
           else reject(new Error(e.statusCode))
+          return Promise
       }
         //请求函数封装
         const req =(props:XHR)=>{
             //实例化XMLHttpRequest对象
-            //@ts-ignore
             const request = new XMLHttpRequest();
             request.withCredentials = true;
             request.open(props.method,
                 baseConfig.baseUrl+props.url,
                 true)
             request.responseType = props.resMethod;
-            console.log(request)
+
             if (props.method === 'get') {
                 request.send(props.data);
             } else {
 
                 request.setRequestHeader("Content-Type", baseConfig.contentType);
-                console.log(props.data)
                 request.send(props.data)
             }
-            let res = request.responseXML
-            request.onreadystatechange =()=> callBack(res);
+            request.onreadystatechange =()=> callBack(request);
         }
         req(e);
     })
