@@ -14,7 +14,9 @@ import {
  //第四次作业
     PromiseAll,
     Async,
-    Debounce
+    Debounce,
+  //第四次作业
+    Reminder,
 } from "../page/index";
 import { Navigate } from "react-router-dom"
 
@@ -80,6 +82,10 @@ const route = [
             {
                 path:"debounce",
                 element:<Debounce />
+            },
+            {
+                path:"reminder",
+                element:<Reminder />
             },
         ]
     }

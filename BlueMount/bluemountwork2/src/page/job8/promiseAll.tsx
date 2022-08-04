@@ -2,10 +2,8 @@
 //powerby styled.js
 //Cite with https://juejin.cn/post/7069805387490263047
 import React from "react";
-import {MainContain} from "./promise";
 import { Button, Modal } from 'antd';
-
-
+import {MainContain,MainContent} from "./promise";
 //重新封装自制的 Promise.All方法
 class myPromise{
     static MyAll(method:any){
@@ -65,19 +63,21 @@ export function PromiseAll(){
     return (
             <>
                 <MainContain>
-                    {/*异步调取弹窗*/}
-                    <Button onClick={()=> {
-                        MyPromise().then(
-                            r=>showModal(r))
-                    }} >点击触发MyPromiseAll
-                    </Button>
-                    <Modal title="PromiseALL Methods Return"
-                           visible={isModalVisible}
-                           onOk={handleOk}
-                           onCancel={handleCancel}>
-                        {response}
-                    </Modal>
+                    <MainContent>
+                        {/*异步调取弹窗*/}
+                        <Button onClick={()=> {
+                            MyPromise().then(
+                                r=>showModal(r))
+                        }} >点击触发MyPromiseAll
+                        </Button>
+                        <Modal title="PromiseALL Methods Return"
+                               visible={isModalVisible}
+                               onOk={handleOk}
+                               onCancel={handleCancel}>
+                            {response}
+                        </Modal>
+                    </MainContent>
                   </MainContain>
             </>
-    );
+    )
 };

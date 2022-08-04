@@ -55,6 +55,12 @@ export function MenuComponents() {
                     getItem("promise异步封装", "sub_3_2"),
                     getItem("输入框防抖高阶函数", "sub_3_3"),
                 ]),
+            getItem("第五次作业",
+                "3",
+                <PieChartOutlined/>,
+                [
+                    getItem("基于MongoDB的备忘录", "sub_4_1"),
+                    ]),
         ];
         return map;
     };
@@ -76,6 +82,8 @@ export function MenuComponents() {
         sub_3_1: "/home/promiseAll",
         sub_3_2: "/home/async",
         sub_3_3: "/home/debounce",
+        //第五周作业
+        sub_4_1: "/home/reminder",
     };
 
     // 菜单标签点击事件

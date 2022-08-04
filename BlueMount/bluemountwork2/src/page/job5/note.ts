@@ -1,6 +1,6 @@
 //Authored by iiru
 //powerby styled.js
-import { Input, Space } from 'antd';
+
 import styled from "styled-components";
 export const MainContain =styled.div`
    width:600px;
