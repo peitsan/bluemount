@@ -1,0 +1,67 @@
+{
+  "name": "bluemountwork2",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "server": "cd node_server & npm start node_server",
+    "eject": "react-scripts eject",
+    "dev": "concurrently  \"yarn start\" \"yarn server\" "
+  },
+  "dependencies": {
+    "@craco/craco": "^6.4.5",
+    "@reduxjs/toolkit": "^1.8.1",
+    "@testing-library/jest-dom": "^5.16.4",
+    "@testing-library/react": "^13.2.0",
+    "@testing-library/user-event": "^14.2.0",
+    "@types/jest": "^27.5.1",
+    "@types/node": "^17.0.33",
+    "@types/react": "^18.0.9",
+    "@types/react-dom": "^18.0.4",
+    "antd": "4.20.4",
+    "axios": "^0.24.0",
+    "concurrently": "^7.3.0",
+    "cookie-parser": "~1.4.4",
+    "cors": "^2.8.5",
+    "crypto": "^1.0.1",
+    "debug": "~2.6.9",
+    "express": "^4.18.1",
+    "express-generator": "^4.16.1",
+    "http-errors": "~1.6.3",
+    "jade": "~1.11.0",
+    "mongodb": "^4.8.1",
+    "mongoose": "^6.5.0",
+    "morgan": "~1.9.1",
+    "nanoid": "^3.3.4",
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0",
+    "react-redux": "^8.0.1",
+    "react-router-dom": "^6.3.0",
+    "react-scripts": "5.0.1",
+    "styled-components": "^5.3.5",
+    "typescript": "^4.6.4",
+    "web-vitals": "^2.1.4"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@types/styled-components": "^5.1.25"
+  }
+}

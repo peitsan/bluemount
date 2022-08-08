@@ -1,0 +1,39 @@
+/*
+  自定义Menu组件中的样式
+*/
+.ant-layout-sider {
+    min-height: var(--min-height) !important;
+}
+
+.ant-menu,
+.ant-menu-root {
+    color: #efefe0 !important;
+    background-color: var(--first-background-color) !important;
+}
+
+.ant-menu-sub {
+    background-color: var(--second-background-color) !important;
+}
+
+.ant-menu-submenu-selected {
+    color: var(--first-theme-color) !important;
+}
+.ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
+    color: var(--first-theme-color) !important;
+    background-color: var(--second-theme-color) !important;
+}
+.ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected::after {
+    border-right: 3px solid var(--first-theme-color) !important;
+}
+.ant-menu-submenu:hover > .ant-menu-submenu-title > .ant-menu-submenu-arrow,
+.ant-menu-submenu-title:hover,
+.ant-menu-item:hover {
+    color: var(--first-theme-color) !important ;
+}
+
+/* Menu组件样式 */
+.menu-wrapper {
+    height: calc(100% - 64px) !important;
+    min-height: calc(var(--min-height) - 64px) !important;
+    box-shadow: var(--stereoscopic-box-shadow) !important;
+}
