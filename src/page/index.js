@@ -19,4 +19,4 @@ export * from "./job9/async"
 export * from "./job10/debounce"
 
 //第四次考核作业
-export * from "./job11/reminder"
+export * from "./job11/reminders"

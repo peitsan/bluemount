@@ -14,9 +14,8 @@ export const MainContain =styled.div`
   }
 `
 export const MainContent =styled.div`
-     margin:4% 45%;
-     width:200px;
-     float:right;
+     margin:4% 10%;
+     width:80%;
      font-size:32px;
      color:#efefef;
 `

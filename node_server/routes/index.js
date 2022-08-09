@@ -38,7 +38,7 @@ router.get('/', (req, res, next) => {
 });
 
 // 获取全部的todo
-router.get('/getAllItems', (req, res, next) => {
+router.get('/getAllReminder', (req, res, next) => {
 	Reminder.find({}).sort({'date': -1}).exec((err, todoList) => {
 		if (err) {
 			console.log(err);
@@ -49,8 +49,9 @@ router.get('/getAllItems', (req, res, next) => {
 });
 
 // 添加todo
-router.post('/addItem', (req, res, next) => {
+router.post('/addReminder', (req, res, next) => {
 	let newItem = req.body;
+	console.log(req)
 	Reminder.create(newItem, (err) => {
 		if (err) {
 			console.log(err);
@@ -67,7 +68,32 @@ router.post('/addItem', (req, res, next) => {
 })
 
 // 删除todo
-router.post('/deleteItem', (req, res, next) => {
+router.post('/deleteReminder', (req, res, next) => {
+	console.log(typeof req.body);
+	let delete_key = req.body
+	Reminder.deleteOne(delete_key, (err, result) => {
+		if (err) {
+			console.log(err)
+		}else {
+			res.json(result);
+		}
+	});
+});
+
+// 按关键词查找 findReminder
+router.post('/findReminder', (req, res, next) => {
+	console.log(req.body);
+	let delete_date = req.body
+	Reminder.remove(delete_date, (err, result) => {
+		if (err) {
+			console.log(err)
+		}else {
+			res.json(result);
+		}
+	});
+});
+// 更新 updateReminder
+router.post('/updateReminder', (req, res, next) => {
 	console.log(req.body);
 	let delete_date = req.body.date
 	Reminder.remove({date: delete_date}, (err, result) => {

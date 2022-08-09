@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-
 const DB_URL = "mongodb://127.0.0.1:27017/reminder"
 
 // 后面两个不需要记忆，会自动提示
