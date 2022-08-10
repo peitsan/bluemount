@@ -3,7 +3,7 @@ var router = express.Router();
 var Reminder = require('../sql/models/reminder')
 /* 这是用户登录的接口*/
 const sql = require('./../sql');
-const Admin = require('./../sql/col/Admin');
+const Admin = require('./../sql/interface/admin');
 const crypto = require('crypto');
 router.post('/login', (req, res, next) => {
 	/* 获取请求数据*/
@@ -69,7 +69,6 @@ router.post('/addReminder', (req, res, next) => {
 
 // 删除todo
 router.post('/deleteReminder', (req, res, next) => {
-	console.log(typeof req.body);
 	let delete_key = req.body
 	Reminder.deleteOne(delete_key, (err, result) => {
 		if (err) {
@@ -79,12 +78,30 @@ router.post('/deleteReminder', (req, res, next) => {
 		}
 	});
 });
-
+// 按日期范围查找 findReminderRange
+router.post('/findReminderRange', (req, res, next) => {
+	console.log(res.body)
+	let start_date = req.body.value[0];
+	let end_date = req.body.value[1];
+	Reminder.find({ $and:[{ date: { $gte: start_date } }, { date: { $lte: end_date } }] },(err,result) => {
+			if(err){console.log(err)
+				res.send({
+				  code: 500,
+				  msg: '查询失败'
+				})}
+			else{
+				res.send({
+					code: 200,
+					msg: '查询成功',
+					result
+				  })
+			}
+		});
+});
 // 按关键词查找 findReminder
 router.post('/findReminder', (req, res, next) => {
-	console.log(req.body);
-	let delete_date = req.body
-	Reminder.remove(delete_date, (err, result) => {
+	const txt =  new RegExp(req.body.content, 'i');
+	Reminder.find({content:{$regex: txt}}, (err, result) => {
 		if (err) {
 			console.log(err)
 		}else {
@@ -94,9 +111,7 @@ router.post('/findReminder', (req, res, next) => {
 });
 // 更新 updateReminder
 router.post('/updateReminder', (req, res, next) => {
-	console.log(req.body);
-	let delete_date = req.body.date
-	Reminder.remove({date: delete_date}, (err, result) => {
+	Reminder.updateOne({_id:req.body._id},{content:req.body.content}, (err, result) => {
 		if (err) {
 			console.log(err)
 		}else {

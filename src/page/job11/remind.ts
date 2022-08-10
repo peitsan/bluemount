@@ -19,3 +19,43 @@ export const MainContent =styled.div`
      font-size:32px;
      color:#efefef;
 `
+export const Tarbar =styled.div`
+     height:100%;
+     display:flex;
+     width:80%;
+     font-size:32px;
+     color:#efefef;
+     .AddButton{
+          margin:10% 5% 5% 5%;  
+     }
+     .SearchInput{
+          margin:10% 0% 5%  5%; 
+          marginBottom: 16; 
+          width: '10%' 
+     }
+     .SearchPicker{
+          margin:10% 0% 5% 0%;  
+          marginBottom: 16; 
+          width:'40%' 
+     }
+`
+export const FormStyle = styled.div`
+     .editable-cell {
+     position: relative;
+   }
+   
+   .editable-cell-value-wrap {
+     padding: 5px 12px;
+     cursor: pointer;
+   }
+   
+   .editable-row:hover .editable-cell-value-wrap {
+     padding: 4px 11px;
+     border: 1px solid #d9d9d9;
+     border-radius: 2px;
+   }
+   
+   [data-theme='dark'] .editable-row:hover .editable-cell-value-wrap {
+     border: 1px solid #434343;
+   }
+`
