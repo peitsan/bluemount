@@ -22,19 +22,12 @@ interface AddParams {
     date:InputRef|null
     content:InputRef|null
 }
-interface Item {
-  key: string;
-  _id: string;
-  date: string;
-  content: string;
-  operation: any;
-}
 interface EditableRowProps {
   index: number;
 }
 interface UpdateParams {
-  _id:string,
-  content:string
+  _id:InputRef|null|any,
+  content:InputRef|null|any
 }
 const loginParam = {
         username:'wudaxun',
@@ -44,6 +37,11 @@ const AddReminder:AddParams = {
     content:null,
     date:null,
  }
+ const UpdateReminder:UpdateParams = {
+  _id:'',
+  content:''
+}
+
 const SearchParams:{content:InputRef|null}={content:null}  
 
 export function Reminder(){
@@ -147,79 +145,8 @@ const EditableRow: React.FC<EditableRowProps> = ({ index, ...props }) => {
   );
 };
 
-interface EditableCellProps {
-  title: React.ReactNode;
-  editable: boolean;
-  children: React.ReactNode;
-  dataIndex: keyof Item;
-  record: Item;
-  handleMouseOut:(record: Item)=> {};
-  handleSave: (record: Item) => {};
-}
-const handleMouseOut = (e:any)=>{
-  return ({editable:false})
-}
-const EditableCell: React.FC<EditableCellProps> = ({
-  title,
-  editable,
-  children,
-  dataIndex,
-  record,
-  handleMouseOut,
-  handleSave,
-  ...restProps
-}) => {
-  const [editing, setEditing] = useState(false);
-  const RefInput = useRef<InputRef>(null);
-  const form = useContext(EditableContext)!;
-  useEffect(()=>{GetReminderData()
-    return ()=>{
-      if (editing) {
-              RefInput.current!.focus();
-      }}
-  },[editing]);
 
-  const toggleEdit = () => {
-    setEditing(!editing);
-    form.setFieldsValue({ [dataIndex]: record[dataIndex] });
-  };
-
-  const save = async () => {
-    try {
-      const values = await form.validateFields();
-      toggleEdit();
-      handleSave({ ...record, ...values });
-    } catch (errInfo) {
-      console.log('保存失败:', errInfo);
-    }
-  };
-
-  let childNode = children;
-  if (editable) {
-    childNode = "确认修改?" ? (
-      <Form.Item
-        style={{ margin: 0 }}
-        name={dataIndex}
-        rules={[
-          {
-            required: true,
-            message: `${title}不能为空.`,
-          },
-        ]}
-      >
-        <Input ref={RefInput} onPressEnter={save} onBlur={save} />
-      </Form.Item>
-    ) : (
-      <div className="editable-cell-value-wrap" style={{ paddingRight: 24 }} onClick={toggleEdit}>
-        {children}
-      </div>
-    );
-  }
-  return <td {...restProps}>{childNode}</td>;
-};
-
-type EditableTableProps = Parameters<typeof Table>[0];
-type ColumnTypes = Exclude<EditableTableProps['columns'], undefined>;
+type ColumnTypes = Exclude<any, undefined>;
  
 //初始数据
   const defaultColumns: (ColumnTypes[number] & { editable?: boolean; dataIndex: string })[] = [
@@ -229,7 +156,7 @@ type ColumnTypes = Exclude<EditableTableProps['columns'], undefined>;
             width: 60,
             dataIndex: 'num',
             key: 'sortNum',
-          render: (text, record, index) => `${(pageOption.pageNo - 1) * 8 + (index + 1)}`,
+          render: (text:any, record:any, index:any) => `${(pageOption.pageNo - 1) * 8 + (index + 1)}`,
             //${} 中可以放入JS表达式；``是模板字符串，可以在里面加变量
   },
   {
@@ -238,7 +165,7 @@ type ColumnTypes = Exclude<EditableTableProps['columns'], undefined>;
     dataIndex:'date',
     width: 100,
     key: 'startDate',
-    render:(text) =>{
+    render:(text:any) =>{
         return <span>{moment.locale() && moment(text).format('MMMM Do YYYY,a h:mm')} </span>
     },
 
@@ -252,32 +179,46 @@ type ColumnTypes = Exclude<EditableTableProps['columns'], undefined>;
     editable: true,
   },
     {
-      title: '操作',
+      title: '删除',
       dataIndex: '_id',
-      width: 50,
+      width: 30,
       key: 'operation',
       render:(text: any) =>
         Data.length >= 1 ? (
           <Popconfirm title="确认删除?" onConfirm={() => handleDelete(text)}>
             <a>Delete</a>
           </Popconfirm>
-      
+          
+        ) : null
+    },
+    {
+      title: '修改',
+      dataIndex: '_id',
+      width: 30,
+      key: 'operation',
+      render:(text: any) =>
+        Data.length >= 1 ? (
+          <Popconfirm title="确认修改?" onConfirm={() => UptDialogActive(text)}>
+            <a>Update</a>
+          </Popconfirm>
         ) : null
     },
   ];
-  const handleMouseOver=()=>{
-     
-  }
+
 //打开对话框
   const dialogActive = ()=>{
-         setVisible(true);
+         setAddVisible(true);
     }
-  const comp = {
-    body: {
-      row: EditableRow,
-      cell: EditableCell,
-    },
-  };
+    const UptDialogActive = (key:string)=>{
+      console.log(key)
+      setUptVisible(true);
+      setAddMsg(key);
+ } 
+ const handleUpdate=(e:any)=>{
+  Promise.resolve(()=>{
+    
+  })
+}
   const columns = defaultColumns.map(col => {
     if (!col.editable) {
       return col;
@@ -289,16 +230,14 @@ type ColumnTypes = Exclude<EditableTableProps['columns'], undefined>;
         editable: col.editable,
         dataIndex: col.dataIndex,
         title: col.title,
-        handleSave,
+       
       }),
     };
   });
   const handleDelete = (key:string) => {
     DelReminderData({"_id":key})
 };
-  const handleSave = (params:UpdateParams) => {
-    UpdateReminderData(params)
-};
+ 
   //确认添加关闭对话框/后/请求新增备忘录/按钮时间家你听
   const handleOk = () => {
     let tmp:any = {
@@ -311,12 +250,26 @@ type ColumnTypes = Exclude<EditableTableProps['columns'], undefined>;
        // console.log(AddMsg)
        AddReminderData(tmp)
      })
-     setVisible(false);
+     setAddVisible(false);
    };
    const handleCancel = () => {
-     setVisible(false);
+     setAddVisible(false);
    };
- 
+  //确认添加关闭对话框/后/请求新增备忘录/按钮时间家你听
+  const handleOkUpdate = () => {
+    let tmp:any = {
+      _id:AddMsg,
+      content:UpdateReminder.content?.input?.value,
+    }
+     Promise.resolve(()=>{
+     }).then(()=>{
+       UpdateReminderData(tmp)
+     })
+     setUptVisible(false);
+   };
+   const handleCancelUpdate = () => {
+     setUptVisible(false);
+   };
 const [pageOption, setPageOption] = useState({
     pageNo: 1,  //当前页为1
     pageSize: 8, //一页8行
@@ -356,8 +309,10 @@ const paginationProps = {
 //数据表
 const [ Data, setData ] = useState([]);
 const [ AddMsg, setAddMsg ] = useState({});
-const [visible, setVisible] = useState(false);
-const [disabled, setDisabled] = useState(false);
+const [AddVisible, setAddVisible] = useState(false);
+const [UptVisible, setUptVisible] = useState(false);
+const [AddDisabled, setAddDisabled] = useState(false);
+const [UptDisabled, setUptDisabled] = useState(false);
 const [bounds, setBounds] = useState({ left: 0, top: 0, bottom: 0, right: 0 });
 const draggleRef = useRef<HTMLDivElement>(null);
 
@@ -380,12 +335,8 @@ const draggleRef = useRef<HTMLDivElement>(null);
 //加载数据
 const loadData =(e:any)=>{setData(e)}
 //初始化渲染数据
-// useEffect(()=>{GetReminderData()
-//   return ()=>{
-//     if (editing) {
-//             RefInput.current!.focus();
-//     }}
-// },[editing]);
+useEffect(()=>{GetReminderData()
+},[]);
     return (
           <>
              <MainContain>
@@ -403,8 +354,6 @@ const loadData =(e:any)=>{setData(e)}
                       </Tarbar>   
                      <FormStyle>
                             <Table
-                              components={comp}
-                              rowClassName={() => 'editable-row'}
                               bordered
                               dataSource={Data}
                               pagination={paginationProps}
@@ -412,8 +361,8 @@ const loadData =(e:any)=>{setData(e)}
                             
                             />
                     </FormStyle>
-       {/* 增加备忘录 */}
-       <Modal
+         {/* 添加备忘录 */}
+ <Modal
         title={
           <div
             style={{
@@ -421,25 +370,25 @@ const loadData =(e:any)=>{setData(e)}
               cursor: 'move',
             }}
             onMouseOver={() => {
-              if (disabled) {
-                setDisabled(false);
+              if (AddDisabled) {
+                setAddDisabled(false);
               }
             }}
             onMouseOut={() => {
-              setDisabled(true);
+              setAddDisabled(true);
             }}
               onFocus={() => {}}
             onBlur={() => {}}
           >
             添加笔记
-          </div>
+     </div>
         }
-        visible={visible}
+        visible={AddVisible}
         onOk={handleOk}
         onCancel={handleCancel}
         modalRender={modal => (
           <Draggable
-            disabled={disabled}
+            disabled={AddDisabled}
             bounds={bounds}
             onStart={(event, uiData) => onStart(event, uiData)}
           >
@@ -448,6 +397,43 @@ const loadData =(e:any)=>{setData(e)}
         )}
       >
             <Input  ref={input => AddReminder.content = input} placeholder={'请输入笔记内容'}></Input>
+            </Modal>             
+       {/* 修改备忘录 */}
+       <Modal
+        title={
+          <div
+            style={{
+              width: '100%',
+              cursor: 'move',
+            }}
+            onMouseOver={() => {
+              if (UptDisabled) {
+                setUptDisabled(false);
+              }
+            }}
+            onMouseOut={() => {
+              setUptDisabled(true);
+            }}
+              onFocus={() => {}}
+            onBlur={() => {}}
+          >
+            修改笔记
+     </div>
+        }
+        visible={UptVisible}
+        onOk={handleOkUpdate}
+        onCancel={handleCancelUpdate}
+        modalRender={modal => (
+          <Draggable
+            disabled={UptDisabled}
+            bounds={bounds}
+            onStart={(event, uiData) => onStart(event, uiData)}
+          >
+            <div ref={draggleRef}>{modal}</div>
+          </Draggable>
+        )}
+      >
+            <Input  ref={input => UpdateReminder.content = input} placeholder={'请输入笔记内容'}></Input>
             </Modal>
                  </MainContent>
              </MainContain>

@@ -265,9 +265,7 @@ type ColumnTypes = Exclude<EditableTableProps['columns'], undefined>;
         ) : null
     },
   ];
-  const handleMouseOver=()=>{
-     
-  }
+  
 //打开对话框
   const dialogActive = ()=>{
          setVisible(true);
